@@ -20,7 +20,7 @@ namespace IH.Controllers
         {
             return new OkObjectResult(
                 await this.mediator.Send(
-                    new GetDistrictsQuery()));
+                    new GetDistrictsQuery()).ConfigureAwait(false));
         }
     }
 }

@@ -4,17 +4,15 @@ import Home from './components/Home';
 
 import { Route } from 'react-router';
 import { Layout } from './components/Layout';
-import { FetchData } from './components/FetchData';
-import { Counter } from './components/Counter';
 
 import './custom.css'
+import CreateDwelling from './components/CreateDwelling';
 
 const App = () => {
   return (
     <Layout>
       <Route exact path='/' component={Home} />
-      <Route path='/counter' component={Counter} />
-      <Route path='/fetch-data' component={FetchData} />
+      <Route exact path='/dwellings/create' component={CreateDwelling} />
     </Layout>
   );
 }

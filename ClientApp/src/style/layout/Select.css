@@ -1,0 +1,10 @@
+.select-wrapper {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.select {
+  align-self: flex-end;
+  width: 100%;
+}

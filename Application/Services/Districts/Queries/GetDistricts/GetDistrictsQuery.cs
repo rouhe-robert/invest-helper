@@ -31,7 +31,7 @@ namespace IH.Application.Services.Districts.Queries.GetDistricts
                         },
                         Id = district.Id,
                         Name = district.Name,
-                    }).ToListAsync();
+                    }).ToListAsync().ConfigureAwait(false);
             }
         }
     }

@@ -14,5 +14,7 @@ namespace IH.Infrastructure.Data
         public virtual DbSet<City> Cities { get; set; }
 
         public virtual DbSet<District> Districts { get; set; }
+
+        public virtual DbSet<Dwelling> Dwellings { get; set; }
     }
 }

@@ -11,6 +11,8 @@ namespace IH.Application.Contracts.Data
 
         DbSet<District> Districts { get; }
 
+        DbSet<Dwelling> Dwellings { get; }
+
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
 }

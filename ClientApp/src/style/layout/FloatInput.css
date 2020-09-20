@@ -1,0 +1,10 @@
+.float-input-wrapper {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.float-input {
+  align-self: flex-end;
+  width: 100%;
+}

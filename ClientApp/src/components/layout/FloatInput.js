@@ -1,13 +1,13 @@
 import React from 'react';
 import { FormGroup, Input, Label } from 'reactstrap';
 
-import '../../style/layout/NumberInput.css';
+import '../../style/layout/FloatInput.css';
 
-const NumberInput = ({id, label, setValue, value}) => {
+const FloatInput = ({id, label, setValue, value}) => {
 
   var displayedValue = value === '0' ? '' : value;
 
-  const isNumeric = value => !isNaN(parseInt(value)) && isFinite(value) && parseInt(value).toString() === value;
+  const isNumeric = value => !isNaN(parseFloat(value)) && isFinite(value);
 
   const onChange = event => {
     if (event.target.value === '') {
@@ -15,13 +15,13 @@ const NumberInput = ({id, label, setValue, value}) => {
     }
 
     if (isNumeric(event.target.value)) {
-      setValue(parseInt(event.target.value));
+      setValue(event.target.value);
     }
   }
 
   return (
-    <div className="number-input-wrapper">
-      <div className="number-input">
+    <div className="float-input-wrapper">
+      <div className="float-input">
         <FormGroup>
           <Label for={id}>{label}</Label>
           <Input
@@ -35,4 +35,4 @@ const NumberInput = ({id, label, setValue, value}) => {
   );
 }
 
-export default NumberInput;
+export default FloatInput;

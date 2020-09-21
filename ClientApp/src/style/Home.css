@@ -1,0 +1,12 @@
+button {
+  float:right;
+  margin-bottom: 1rem;
+}
+
+.dwellings-list tbody tr {
+  cursor: pointer;
+}
+
+.dwellings-list tbody tr:hover {
+  background-color: var(--theme-light-grey);
+}

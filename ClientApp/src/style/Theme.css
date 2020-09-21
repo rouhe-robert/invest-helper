@@ -1,0 +1,22 @@
+:root {
+  --theme-light-grey: #E0E0E0;
+  --theme-primary-color: #95C8D8;
+  --theme-primary-color-text: #FFFFFF;
+  --theme-secondary-color: #7EF9FF;
+  --theme-warning: #E01A76;
+}
+
+/* Provide sufficient contrast against white background */
+a {
+  color: var(--theme-primary-color);
+}
+
+code {
+  color: var(--theme-warning);
+}
+
+.btn-primary {
+  color: var(--theme-primary-color-text);
+  background-color: var(--theme-secondary-color);
+  border-color: var(--theme-primary-color);
+}

@@ -1,3 +1,6 @@
 export default {
-  get: () => fetch('/api/districts')
+  get: async () => {
+    const response = await fetch('/api/districts');
+    return await response.json();
+  }
 }

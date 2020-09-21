@@ -52,15 +52,15 @@ const IncomeCalculation = ({
       <h2>Laskelmat</h2>
 
       <h4>Laina</h4>
-      <p>Suuruus: {loan}€</p>
-      <p>Rahoitettava itse: {ownMoneyAmount}€</p>
-      <p>Velan takaisinmaksu: {loanMontlyPayment}€/kk</p>
-      <p>Velan korkojen maksu: {loanIntrestMonthlyPayment}€/kk</p>
+      <p>Suuruus: {loan.toFixed(2)}€</p>
+      <p>Rahoitettava itse: {ownMoneyAmount.toFixed(2)}€</p>
+      <p>Velan takaisinmaksu: {loanMontlyPayment.toFixed(2)}€/kk</p>
+      <p>Velan korkojen maksu: {loanIntrestMonthlyPayment.toFixed(2)}€/kk</p>
 
       <h4>Korjausvelka</h4>
       <p>Korjausvelka yhteensä: {renovationDebt}€</p>
       <p>Hinta korjausvelan kanssa: {costWithRenovationDebt}€</p>
-      <p>Oman rahan tarve asunnon korjausvelan kanssa: {ownMoneyWithDwellingRenovationDebt}€</p>
+      <p>Oman rahan tarve asunnon korjausvelan kanssa: {ownMoneyWithDwellingRenovationDebt.toFixed(2)}€</p>
 
       <h4>Neliöhinnat</h4>
       <p>Ostohinta: {pricePerSquareMeter.toFixed(2)} / m²</p>

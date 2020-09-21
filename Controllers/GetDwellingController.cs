@@ -1,26 +1,26 @@
 ﻿using System.Threading.Tasks;
-using IH.Application.Services.Dwellings.Queries.GetDwellings;
+using IH.Application.Services.Dwellings.Queries.GetDwelling;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IH.Controllers
 {
     [ApiController]
-    public class GetDwellingsController : ControllerBase
+    public class GetDwellingController : ControllerBase
     {
         private readonly IMediator mediator;
 
-        public GetDwellingsController(IMediator mediator)
+        public GetDwellingController(IMediator mediator)
         {
             this.mediator = mediator;
         }
 
-        [HttpGet("/api/dwellings")]
-        public async Task<object> Get()
+        [HttpGet("/api/dwellings/{id}")]
+        public async Task<object> Get(int id)
         {
             return new OkObjectResult(
                 await this.mediator.Send(
-                    new GetDwellingsQuery()).ConfigureAwait(false));
+                    new GetDwellingQuery(id)).ConfigureAwait(false));
         }
     }
 }

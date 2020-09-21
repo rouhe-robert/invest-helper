@@ -37,7 +37,7 @@ const CreateDwelling = () => {
   useEffect(
     () => {
       const initializeDistricts = async () => {
-        const response = await (await apiDistricts.get()).json();
+        const response = await apiDistricts.get();
         setDistricts(
           [
             {name: '-', value: ''},

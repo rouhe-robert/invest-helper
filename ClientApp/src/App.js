@@ -5,14 +5,15 @@ import Home from './components/Home';
 import { Route } from 'react-router';
 import { Layout } from './components/Layout';
 
-import './custom.css'
+import './style/Theme.css'
 import CreateDwelling from './components/CreateDwelling';
+import Dwelling from './components/Dwelling';
 
 const App = () => {
   return (
     <Layout>
       <Route exact path='/' component={Home} />
-      <Route exact path='/dwellings/create' component={CreateDwelling} />
+      <Route exact path='/dwellings/:id' component={Dwelling} />
     </Layout>
   );
 }

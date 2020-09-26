@@ -52,6 +52,7 @@ const Dwelling = ({match}) => {
     if (activeTab === dwellingTabTypes.ANALYTICS) {
       return (
         <Analytics
+          bargainedAmount={bargainedAmount}
           capitalIncomeTaxRate={parseFloat(capitalIncomeTaxRate)}
           debtEquityRatio={parseFloat(debtEquityRatio)}
           debtIntrestRate={parseFloat(debtIntrestRate)}

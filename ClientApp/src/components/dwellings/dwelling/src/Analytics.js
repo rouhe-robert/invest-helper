@@ -1,6 +1,18 @@
 import React from 'react';
+import { Col, Container, Row } from 'reactstrap';
+
+import getCapitalIncomeMonthlyTax from '../../../../services/dwellings/getCapitalIncomeMonthlyTax';
+import getMoneyFlowWithoutTax from '../../../../services/dwellings/getMoneyFlowWithoutTax';
+import getMoneyFlowWithTax from '../../../../services/dwellings/getMoneyFlowWithTax';
+import getMonthlyProfit from '../../../../services/dwellings/getMonthlyProfit';
+import getPriceWithAllDebts from '../../../../services/dwellings/getPriceWithAllDebts';
+import getProfitPercentageForInvestedMoney from '../../../../services/dwellings/getProfitPercentageForInvestedMoney';
+import getProfitPercentageForPrice from '../../../../services/dwellings/getProfitPercentageForPrice';
+import getTotalDebt from '../../../../services/dwellings/getTotalDebt';
+import getTotalMonthlyPayment from '../../../../services/dwellings/getTotalMonthlyPayment';
 
 const Analytics = ({
+  bargainedAmount,
   capitalIncomeTaxRate,
   debtEquityRatio,
   debtIntrestRate,
@@ -9,69 +21,122 @@ const Analytics = ({
   rentEuros,
   rentingRate,
 }) => {
-  const allInputsHasLargerThanZeroValues = () => (
-    capitalIncomeTaxRate > 0 &&
-    debtEquityRatio > 0 &&
-    debtIntrestRate > 0 &&
-    debtPaymentYears > 0 &&
-    dwelling.maintenanceCharge > 0 &&
-    dwelling.price > 0 &&
-    rentEuros > 0 &&
-    rentingRate > 0 &&
-    dwelling.squareMeters > 0
+
+  const capitalIncomeMonthlyTax = getCapitalIncomeMonthlyTax(
+    dwelling,
+    rentEuros,
+    rentingRate,
+    capitalIncomeTaxRate
   );
 
-  if (!allInputsHasLargerThanZeroValues()) {
-    return null;
-  }
+  const moneyFlowWithoutTax = getMoneyFlowWithoutTax(
+    dwelling,
+    rentEuros,
+    rentingRate,
+    bargainedAmount,
+    debtEquityRatio,
+    debtIntrestRate,
+    debtPaymentYears
+  );
 
-  const loan = dwelling.price * ((100 - debtEquityRatio) / 100);
-  const ownMoneyAmount = dwelling.price - loan;
-  const loanMontlyPayment = loan / debtPaymentYears / 12;
-  const loanIntrestMonthlyPayment = (loan * (debtIntrestRate / 100)) / 12;
-  
-  const renovationDebt = dwelling.dwellingRenovationDebt + dwelling.housingCooperativeRenovationDebt;
-  const costWithRenovationDebt = dwelling.price + renovationDebt;
-  const ownMoneyWithDwellingRenovationDebt = ownMoneyAmount + dwelling.dwellingRenovationDebt;
+  const moneyFlowWithTax = getMoneyFlowWithTax(
+    dwelling,
+    rentEuros,
+    rentingRate,
+    bargainedAmount,
+    debtEquityRatio,
+    debtIntrestRate,
+    debtPaymentYears,
+    capitalIncomeTaxRate
+  );
 
-  const pricePerSquareMeter = dwelling.price / dwelling.squareMeters;
-  const maintenanceChargePerSquareMeter = dwelling.maintenanceCharge / dwelling.squareMeters;
+  const monthlyProfit = getMonthlyProfit(
+    dwelling,
+    rentEuros,
+    rentingRate,
+    bargainedAmount,
+    debtEquityRatio,
+    debtIntrestRate
+  );
 
-  const averageMonthlyRentPayment = (rentEuros / 12) * rentingRate
-  const income = averageMonthlyRentPayment - dwelling.maintenanceCharge - loanIntrestMonthlyPayment;
-  const capitalIncomeTax = income < 0 ? 0 : income * (capitalIncomeTaxRate / 100);
-  const yearlyProfitMargin = (income * 12) / costWithRenovationDebt * 100;
-  const moneyFlow = income - loanMontlyPayment;
+  const priceWithAllDebts = getPriceWithAllDebts(
+    dwelling,
+    bargainedAmount
+  );
+
+  const profitPercentageForInvestedMoney = getProfitPercentageForInvestedMoney(
+    dwelling,
+    bargainedAmount,
+    rentEuros,
+    rentingRate,
+    debtEquityRatio,
+    debtIntrestRate
+  );
+
+  const profitPercentageForPrice = getProfitPercentageForPrice(
+    dwelling,
+    bargainedAmount,
+    rentEuros,
+    rentingRate,
+    debtEquityRatio,
+    debtIntrestRate
+  );
+
+  const totalDebt = getTotalDebt(
+    dwelling,
+    bargainedAmount,
+    debtEquityRatio
+  );
+
+  const totalMonthlyPayment = getTotalMonthlyPayment(
+    dwelling,
+    bargainedAmount,
+    debtEquityRatio,
+    debtIntrestRate,
+    debtPaymentYears
+  );
 
   return (
-    <>
-      <h4>Laskelmat</h4>
-
-      <h5>Laina</h5>
-      <p>Suuruus: {loan.toFixed(2)}€</p>
-      <p>Rahoitettava itse: {ownMoneyAmount.toFixed(2)}€</p>
-      <p>Velan takaisinmaksu: {loanMontlyPayment.toFixed(2)}€/kk</p>
-      <p>Velan korkojen maksu: {loanIntrestMonthlyPayment.toFixed(2)}€/kk</p>
-
-      <h5>Korjausvelka</h5>
-      <p>Korjausvelka yhteensä: {renovationDebt}€</p>
-      <p>Hinta korjausvelan kanssa: {costWithRenovationDebt}€</p>
-      <p>Oman rahan tarve asunnon korjausvelan kanssa: {ownMoneyWithDwellingRenovationDebt.toFixed(2)}€</p>
-
-      <h5>Neliöhinnat</h5>
-      <p>Ostohinta: {pricePerSquareMeter.toFixed(2)} / m²</p>
-      <p>Hoitovastike: {maintenanceChargePerSquareMeter.toFixed(2)}€ / m²</p>
-
-      <h5>Verokulut</h5>
-      <p>Pääomatulovero: {capitalIncomeTax.toFixed(2)}€ / kk</p>
-
-      <h5>Avaintiedot</h5>
-      <p>Keskimääräinen saatu vuokra: {averageMonthlyRentPayment.toFixed(2)}€/kk</p>
-      <p>Tuotto: {income.toFixed(2)}€/kk</p>
-      <p>Tuottoprosentti: {yearlyProfitMargin.toFixed(2)}%/vuosi</p>
-      <p>Rahavirta: {moneyFlow.toFixed(2)}€</p>
-    </>
+    <Container>
+      <Row>
+        <Col md="6">
+          <h5>Rahavirta</h5>
+          Vuokra: {(rentEuros * (rentingRate / 12)).toFixed(2)}€/kk<br />
+          Tuotto: {monthlyProfit.toFixed(2)}€/kk<br />
+          Rahavirta ilman veroja: {moneyFlowWithoutTax.toFixed(2)}€/kk<br />
+          Rahavirta verojen kanssa: {moneyFlowWithTax.toFixed(2)}€/kk
+        </Col>
+        <Col md="6">
+          <h5>Laskutoimituksissa käytetty</h5>
+          Velkasuhde ostohinnasta: {100 - debtEquityRatio}%<br />
+          Korko: {debtIntrestRate}%<br />
+          Velan takaisinmaksuaika: {debtPaymentYears} vuotta<br />
+          Vuokrausaste: {rentingRate}kk vuodessa
+        </Col>
+      </Row>
+      <Row>
+        <Col md="6">
+          <h5>Tuotto</h5>
+          Tuotto ostohinnalle: {profitPercentageForPrice.toFixed(2)}%/vuosi<br />
+          Tuotto velattomalle rahalle: {profitPercentageForInvestedMoney.toFixed(2)}%/vuosi
+        </Col>
+        <Col md="6">
+          <h5>Kuukausikulut</h5>
+          Hoitovastike: {dwelling.maintenanceCharge}€<br />
+          Velan kuukausikulut yhteensä: {totalMonthlyPayment.toFixed(2)}€<br />
+          Pääomatulovero: {capitalIncomeMonthlyTax.toFixed(2)}€
+        </Col>
+      </Row>
+      <Row>
+        <Col md="6">
+          <h5>Hinta</h5>
+          Velaton hinta: <strong>{dwelling.price}</strong>€<br />
+          Korjausvelan kanssa: <strong>{priceWithAllDebts.toFixed(2)}€</strong><br />
+          Velkaa yhteensä korjausvelan kanssa: {totalDebt.toFixed(2)}€
+        </Col>
+      </Row>
+    </Container>
   )
-}
+};
 
 export default Analytics;

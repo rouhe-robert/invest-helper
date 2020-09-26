@@ -1,3 +1,7 @@
+.dwelling button {
+  float: left;
+}
+
 .dwelling .col-md-6,
 .dwelling .col-md-12 {
   margin-bottom: 2rem;

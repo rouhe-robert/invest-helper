@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import Analytics from './src/Analytics';
 import apiDwellings from '../../../api/dwellings';
@@ -16,6 +17,7 @@ const Dwelling = ({match}) => {
 
   const [activeTab, setActiveTab] = useState('basic-information');
   const [bargainedAmount, setBargainedAmount] = useState('0');
+  const history = useHistory();
 
   // Debt
   const [debtPaymentYears, setDebtPaymentYears] = useState('25');
@@ -47,6 +49,13 @@ const Dwelling = ({match}) => {
   if (dwelling === null) {
     return null;
   }
+
+  const deleteDwelling = async () => {
+    if (window.confirm("Haluatko varmasti poistaa asunnon?")) {
+      await apiDwellings.delete(dwelling.id);
+      history.push('/');
+    }
+  };
 
   const getTab = () => {
     if (activeTab === dwellingTabTypes.ANALYTICS) {
@@ -88,6 +97,7 @@ const Dwelling = ({match}) => {
           debtEquityRatio={debtEquityRatio}
           debtIntrestRate={debtIntrestRate}
           debtPaymentYears={debtPaymentYears}
+          deleteDwelling={deleteDwelling}
           rentEuros={rentEuros}
           rentingRate={rentingRate}
           setBargainedAmount={setBargainedAmount}

@@ -1,10 +1,19 @@
 export default {
+  delete: async id => {
+    const response = await fetch(
+      '/api/dwellings/' + id,
+      {
+        method: 'delete'
+      });
+
+    return await response.json();
+  },
   get: async id => {
     const response = typeof id === 'undefined' ?
       await fetch('/api/dwellings') :
       await fetch('/api/dwellings/' + id);
     
-      return await response.json();
+    return await response.json();
   },
   post: async dwelling => {
     const response = await fetch(

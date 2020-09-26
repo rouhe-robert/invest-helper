@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col, Container, Row } from 'reactstrap';
+import { Col, Container, Row, Button } from 'reactstrap';
 
 import FloatInput from '../../../layout/FloatInput';
 
@@ -9,6 +9,7 @@ const Settings = ({
   debtEquityRatio,
   debtIntrestRate,
   debtPaymentYears,
+  deleteDwelling,
   rentEuros,
   rentingRate,
   setBargainedAmount,
@@ -90,6 +91,15 @@ const Settings = ({
             setValue={setRentingRate}
             value={rentingRate}
           />
+        </Col>
+      </Row>
+    </Container>
+
+    <h5>Poista</h5>
+    <Container>
+      <Row>
+        <Col md="4">
+          <Button onClick={deleteDwelling}>Poista</Button>
         </Col>
       </Row>
     </Container>

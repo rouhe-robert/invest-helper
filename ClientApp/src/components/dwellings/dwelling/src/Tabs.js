@@ -1,35 +1,30 @@
 import React from 'react';
 import { Nav, NavItem, NavLink } from 'reactstrap';
 
+import dwellingTabTypes from '../../../../services/enums/dwellingTabTypes';
+
 import '../../../../style/dwellings/dwelling/src/Tabs.css';
 
-const Tabs = ({activeTab, setActiveTab}) => (
-  <Nav className="dwelling-tabs" tabs>
+const Tabs = ({activeTab, setActiveTab}) => {
+  const getNavItem = (type, name) => (
     <NavItem>
       <NavLink
-        className={activeTab === 'basic-information' ? 'active' : ''}
-        onClick={() => setActiveTab('basic-information')}
+        className={activeTab === type ? 'active' : ''}
+        onClick={() => setActiveTab(type)}
       >
-        Perustiedot
+        {name}
       </NavLink>
     </NavItem>
-    <NavItem>
-      <NavLink
-        className={activeTab === 'analytics' ? 'active' : ''}
-        onClick={() => setActiveTab('analytics')}
-      >
-        Analytiikka
-      </NavLink>
-    </NavItem>
-    <NavItem>
-      <NavLink
-        className={activeTab === 'settings' ? 'active' : ''}
-        onClick={() => setActiveTab('settings')}
-      >
-        Asetukset
-      </NavLink>
-    </NavItem>
-  </Nav>
-);
+  );
+
+  return (
+    <Nav className="dwelling-tabs" tabs>
+      {getNavItem(dwellingTabTypes.BASIC_INFORMATION, 'Perustiedot')}
+      {getNavItem(dwellingTabTypes.DEBT, 'Velka')}
+      {getNavItem(dwellingTabTypes.ANALYTICS, 'Analytiikka')}
+      {getNavItem(dwellingTabTypes.SETTINGS, 'Asetukset')}
+    </Nav>
+  );
+}
 
 export default Tabs;

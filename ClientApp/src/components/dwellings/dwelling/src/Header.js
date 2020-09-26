@@ -13,7 +13,7 @@ const getWebLink = (dwelling) => {
 
   return (
     <span className="dwelling-link">
-      &nbsp;
+      {' '}
       (
         <a href={dwelling.webLink} target="_blank">Linkki</a>
       )
@@ -24,7 +24,9 @@ const getWebLink = (dwelling) => {
 const Header = ({dwelling}) => (
   <h3>
     {dwelling.address},
+    {' '}
     {dwelling.district.name},
+    {' '}
     {dwelling.district.city.name}
     {getWebLink(dwelling)}
   </h3>

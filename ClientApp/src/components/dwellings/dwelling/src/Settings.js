@@ -4,12 +4,14 @@ import { Col, Container, Row } from 'reactstrap';
 import FloatInput from '../../../layout/FloatInput';
 
 const Settings = ({
+  bargainedAmount,
   capitalIncomeTaxRate,
   debtEquityRatio,
   debtIntrestRate,
   debtPaymentYears,
   rentEuros,
   rentingRate,
+  setBargainedAmount,
   setCapitalIncomeTaxRate,
   setDebtEquityRatio,
   setDebtIntrestRate,
@@ -43,6 +45,20 @@ const Settings = ({
             label={'Omavaraisuusaste, %'}
             setValue={setDebtEquityRatio}
             value={debtEquityRatio}
+          />
+        </Col>
+      </Row>
+    </Container>
+
+    <h5>Kulujen alentaminen</h5>
+    <Container>
+      <Row>
+        <Col md="4">
+          <FloatInput
+            id={'bargained-amount'}
+            label={'Tingitty, €'}
+            setValue={setBargainedAmount}
+            value={bargainedAmount}
           />
         </Col>
       </Row>

@@ -4,13 +4,18 @@ import Analytics from './src/Analytics';
 import apiDwellings from '../../../api/dwellings';
 import BasicInformation from './src/BasicInformation';
 import CreateDwelling from '../CreateDwelling';
+import Debt from './src/Debt';
 import Header from './src/Header';
 import Settings from './src/Settings';
 import Tabs from './src/Tabs';
+import dwellingTabTypes from '../../../services/enums/dwellingTabTypes';
+
+import '../../../style/dwellings/dwelling/Dwelling.css';
 
 const Dwelling = ({match}) => {
 
   const [activeTab, setActiveTab] = useState('basic-information');
+  const [bargainedAmount, setBargainedAmount] = useState('0');
 
   // Debt
   const [debtPaymentYears, setDebtPaymentYears] = useState('25');
@@ -44,7 +49,7 @@ const Dwelling = ({match}) => {
   }
 
   const getTab = () => {
-    if (activeTab === 'analytics') {
+    if (activeTab === dwellingTabTypes.ANALYTICS) {
       return (
         <Analytics
           capitalIncomeTaxRate={parseFloat(capitalIncomeTaxRate)}
@@ -58,19 +63,33 @@ const Dwelling = ({match}) => {
       );
     }
 
-    if (activeTab === 'basic-information') {
+    if (activeTab === dwellingTabTypes.DEBT) {
+      return (
+        <Debt
+          bargainedAmount={bargainedAmount}
+          debtEquityRatio={debtEquityRatio}
+          debtIntrestRate={debtIntrestRate}
+          debtPaymentYears={debtPaymentYears}
+          dwelling={dwelling}
+        />
+      );
+    }
+
+    if (activeTab === dwellingTabTypes.BASIC_INFORMATION) {
       return <BasicInformation dwelling={dwelling} />;
     }
 
-    if (activeTab === 'settings') {
+    if (activeTab === dwellingTabTypes.SETTINGS) {
       return (
         <Settings
+          bargainedAmount={bargainedAmount}
           capitalIncomeTaxRate={capitalIncomeTaxRate}
           debtEquityRatio={debtEquityRatio}
           debtIntrestRate={debtIntrestRate}
           debtPaymentYears={debtPaymentYears}
           rentEuros={rentEuros}
           rentingRate={rentingRate}
+          setBargainedAmount={setBargainedAmount}
           setCapitalIncomeTaxRate={setCapitalIncomeTaxRate}
           setDebtEquityRatio={setDebtEquityRatio}
           setDebtIntrestRate={setDebtIntrestRate}
@@ -85,11 +104,11 @@ const Dwelling = ({match}) => {
   }
 
   return (
-    <>
+    <div className="dwelling">
       <Header dwelling={dwelling} />
       <Tabs activeTab={activeTab} setActiveTab={setActiveTab} />
       {getTab()}
-    </>
+    </div>
   );
 }
 

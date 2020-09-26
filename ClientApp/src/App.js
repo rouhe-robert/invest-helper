@@ -1,13 +1,12 @@
 import React from 'react';
 
-import Home from './components/Home';
-
 import { Route } from 'react-router';
+
+import Dwelling from './components/dwellings/dwelling/Dwelling';
+import Home from './components/Home';
 import { Layout } from './components/Layout';
 
-import './style/Theme.css'
-import CreateDwelling from './components/CreateDwelling';
-import Dwelling from './components/Dwelling';
+import './style/Theme.css';
 
 const App = () => {
   return (

@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-
-import apiDistricts from '../api/districts';
-import apiDwellings from '../api/dwellings';
-import FloatInput from './layout/FloatInput';
-import NumberInput from './layout/NumberInput';
-import Select from './layout/Select';
-import TextInput from './layout/TextInput';
 import { Col, Container, Row, Button } from 'reactstrap';
-import CheckboxInput from './layout/CheckboxInput';
+
+import apiDistricts from '../../api/districts';
+import apiDwellings from '../../api/dwellings';
+import CheckboxInput from '../layout/CheckboxInput';
+import FloatInput from '../layout/FloatInput';
+import NumberInput from '../layout/NumberInput';
+import Select from '../layout/Select';
+import TextInput from '../layout/TextInput';
 
 const CreateDwelling = () => {
 

@@ -17,15 +17,20 @@ const CreateDwelling = () => {
 
   // Dwelling
   const [address, setAddress] = useState('');
+  const [builtYear, setBuiltYear] = useState('0');
   const [district, setDistrict] = useState('');
   const [price, setPrice] = useState('0');
+  const [financingDebt, setFinancingDebt] = useState('0');
   const [maintenanceCharge, setMaintenanceCharge] = useState('0');
+  const [financingDebtCharge, setFinancingDebtCharge] = useState('0');
   const [type, setType] = useState('apartment');
   const [squareMeters, setSquareMeters] = useState('0');
   const [roomsCount, setRoomsCount] = useState('0');
+  const [floor, setFloor] = useState('0');
   const [hasElevator, setHasElevator] = useState(false);
   const [hasOwnLandLot, setHasOwnLandLot] = useState(false);
   const [hasSauna, setHasSauna] = useState(false);
+  const [webLink, setWebLink] = useState('');
 
   // RenovationDebt
   const [dwellingRenovationDebt, setDwellingRenovationDebt] = useState('0');
@@ -57,8 +62,12 @@ const CreateDwelling = () => {
   const onSave = () => {
     apiDwellings.post({
       address,
+      builtYear: parseInt(builtYear),
       district: parseInt(district),
       dwellingRenovationDebt: parseFloat(dwellingRenovationDebt),
+      financingDebt: parseFloat(financingDebt),
+      financingDebtCharge: parseFloat(financingDebtCharge),
+      floor: parseInt(floor),
       hasElevator,
       hasOwnLandLot,
       hasSauna,
@@ -68,7 +77,8 @@ const CreateDwelling = () => {
       rentEuros: parseFloat(rentEuros),
       roomsCount: parseInt(roomsCount),
       squareMeters: parseFloat(squareMeters),
-      type
+      type,
+      webLink,
     });
 
     setSaved(true);
@@ -87,7 +97,7 @@ const CreateDwelling = () => {
       <h4>Asunto</h4>
       <Container>
         <Row>
-          <Col sm="6">
+          <Col md="3">
             <TextInput
               id={'address'}
               label={'Osoite'}
@@ -95,7 +105,7 @@ const CreateDwelling = () => {
               value={address}
             />
           </Col>
-          <Col sm="6">
+          <Col md="3">
             <Select
               id={'district'}
               label={'Kaupunginosa'}
@@ -104,17 +114,41 @@ const CreateDwelling = () => {
               value={district}
             />
           </Col>
+          <Col md="3">
+            <NumberInput
+              id={'built-year'}
+              label={'Rakennusvuosi'}
+              setValue={setBuiltYear}
+              value={builtYear}
+            />
+          </Col>
+          <Col md="3">
+            <TextInput
+              id={'web-link'}
+              label={'Linkki'}
+              setValue={setWebLink}
+              value={webLink}
+            />
+          </Col>
         </Row>
         <Row>
-          <Col sm="6">
+          <Col md="3">
             <FloatInput
               id={'price'}
-              label={'Hinta, €'}
+              label={'Velaton hinta, €'}
               setValue={setPrice}
               value={price}
             />
           </Col>
-          <Col sm="6">
+          <Col md="3">
+            <FloatInput
+              id={'financing-debt'}
+              label={'Taloyhtiövelka, €'}
+              setValue={setFinancingDebt}
+              value={financingDebt}
+            />
+          </Col>
+          <Col md="3">
             <FloatInput
               id={'maintenance-charge'}
               label={'Hoitovastike, €'}
@@ -122,9 +156,17 @@ const CreateDwelling = () => {
               value={maintenanceCharge}
             />
           </Col>
+          <Col md="3">
+            <FloatInput
+              id={'financing-debt-charge'}
+              label={'Rahoitusvastike, €'}
+              setValue={setFinancingDebtCharge}
+              value={financingDebtCharge}
+            />
+          </Col>
         </Row>
         <Row>
-          <Col md="4">
+          <Col md="3">
             <Select
               id={'type'}
               label={'Tyyppi'}
@@ -137,7 +179,7 @@ const CreateDwelling = () => {
               value={type}
             />
           </Col>
-          <Col md="4">
+          <Col md="3">
             <FloatInput
               id={'square-meters'}
               label={'Neliöt, m²'}
@@ -145,12 +187,20 @@ const CreateDwelling = () => {
               value={squareMeters}
             />
           </Col>
-          <Col md="4">
+          <Col md="3">
             <NumberInput
               id={'rooms-count'}
               label={'Huoneiden lukumäärä'}
               setValue={setRoomsCount}
               value={roomsCount}
+            />
+          </Col>
+          <Col md="3">
+            <NumberInput
+              id={'floor'}
+              label={'Kerros'}
+              setValue={setFloor}
+              value={floor}
             />
           </Col>
         </Row>

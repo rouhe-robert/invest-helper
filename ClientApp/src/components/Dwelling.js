@@ -50,14 +50,29 @@ const Dwelling = ({match}) => {
   const getHasOwnLandlot = () => dwelling.hasOwnLandLot ? <>Oma tontti<br /></> : null;
   const getHasSauna = () => dwelling.hasSauna ? <>Sauna<br /></> : null;
 
+  const getWebLink = () => {
+    if (dwelling.webLink === null || dwelling.webLink === '') {
+      return null;
+    }
+
+    return (
+      <>
+        <a href={dwelling.webLink} target="_blank">Linkki</a>
+        <br />
+      </>
+    );
+  };
+
   return (
     <>
       <h4>{dwelling.address}, {dwelling.district.name}, {dwelling.district.city.name}</h4>
       <Container>
         <Row>
           <Col md="4">
+            {getWebLink()}
             Neliöt: {dwelling.squareMeters}m²<br />
-            Huoneiden lukumäärä: {dwelling.roomsCount}
+            Huoneiden lukumäärä: {dwelling.roomsCount}<br/>
+            Kerros: {dwelling.floor}
           </Col>
           <Col md="4">
             {getApartmentType()}
@@ -66,8 +81,10 @@ const Dwelling = ({match}) => {
             {getHasSauna()}
           </Col>
           <Col md="4">
-            Hinta: <strong>{dwelling.price}€</strong><br />
+            Velaton hinta: <strong>{dwelling.price}€</strong><br />
+            Taloyhtiövelka: {dwelling.financingDebt}€<br />
             Hoitovastike: {dwelling.maintenanceCharge}€<br />
+            Rahoitusvastike: {dwelling.financingDebtCharge}€<br />
             Asunnon korjausvelka: {dwelling.dwellingRenovationDebt}€<br />
             Taloyhtiön korjausvelka: {dwelling.housingCooperativeRenovationDebt}€
           </Col>

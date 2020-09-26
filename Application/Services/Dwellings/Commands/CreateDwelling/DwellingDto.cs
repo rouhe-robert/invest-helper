@@ -4,9 +4,17 @@ namespace IH.Application.Services.Dwellings.Commands.CreateDwelling
     {
         public string Address { get; set; }
 
+        public int BuiltYear { get; set; }
+
         public int District { get; set; }
 
         public double DwellingRenovationDebt { get; set; }
+
+        public double FinancingDebt { get; set; }
+
+        public double FinancingDebtCharge { get; set; }
+
+        public int Floor { get; set; }
 
         public bool HasElevator { get; set; }
 
@@ -27,5 +35,7 @@ namespace IH.Application.Services.Dwellings.Commands.CreateDwelling
         public double SquareMeters { get; set; }
 
         public string Type { get; set; }
+
+        public string WebLink { get; set; }
     }
 }

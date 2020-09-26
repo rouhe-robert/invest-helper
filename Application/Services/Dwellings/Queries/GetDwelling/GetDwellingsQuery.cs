@@ -33,6 +33,8 @@ namespace IH.Application.Services.Dwellings.Queries.GetDwelling
                     .Select(dwelling => new DwellingDto
                         {
                             Address = dwelling.Address,
+                            Archived = dwelling.Archived,
+                            BuiltYear = dwelling.BuiltYear,
                             District = new DistrictDto
                             {
                                 City = new CityDto
@@ -42,6 +44,9 @@ namespace IH.Application.Services.Dwellings.Queries.GetDwelling
                                 Name = dwelling.District.Name,
                             },
                             DwellingRenovationDebt = dwelling.DwellingRenovationDebt,
+                            FinancingDebt = dwelling.FinancingDebt,
+                            FinancingDebtCharge = dwelling.FinancingDebtCharge,
+                            Floor = dwelling.Floor,
                             HasElevator = dwelling.HasElevator,
                             HasOwnLandLot = dwelling.HasOwnLandLot,
                             HasSauna = dwelling.HasSauna,
@@ -53,6 +58,7 @@ namespace IH.Application.Services.Dwellings.Queries.GetDwelling
                             RoomsCount = dwelling.RoomsCount,
                             SquareMeters = dwelling.SquareMeters,
                             Type = dwelling.Type,
+                            WebLink = dwelling.WebLink
                         }).FirstOrDefaultAsync().ConfigureAwait(false);
             }
         }

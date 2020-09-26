@@ -38,8 +38,12 @@ namespace IH.Application.Services.Dwellings.Commands.CreateDwelling
                     new Dwelling
                     {
                         Address = request.Dwelling.Address,
+                        BuiltYear = request.Dwelling.BuiltYear,
                         District = district,
                         DwellingRenovationDebt = request.Dwelling.DwellingRenovationDebt,
+                        FinancingDebt = request.Dwelling.FinancingDebt,
+                        FinancingDebtCharge = request.Dwelling.FinancingDebtCharge,
+                        Floor = request.Dwelling.Floor,
                         HasElevator = request.Dwelling.HasElevator,
                         HasOwnLandLot = request.Dwelling.HasOwnLandLot,
                         HasSauna = request.Dwelling.HasSauna,
@@ -50,6 +54,7 @@ namespace IH.Application.Services.Dwellings.Commands.CreateDwelling
                         RoomsCount = request.Dwelling.RoomsCount,
                         SquareMeters = request.Dwelling.SquareMeters,
                         Type = request.Dwelling.Type,
+                        WebLink = request.Dwelling.WebLink
                     });
 
                 await this.context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);

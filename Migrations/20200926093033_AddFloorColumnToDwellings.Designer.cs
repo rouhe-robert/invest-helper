@@ -3,15 +3,17 @@ using System;
 using IH.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace invest_helper.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200926093033_AddFloorColumnToDwellings")]
+    partial class AddFloorColumnToDwellings
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -66,9 +68,6 @@ namespace invest_helper.Migrations
 
                     b.Property<bool>("Archived")
                         .HasColumnType("boolean");
-
-                    b.Property<int>("BuiltYear")
-                        .HasColumnType("integer");
 
                     b.Property<int?>("DistrictId")
                         .HasColumnType("integer");

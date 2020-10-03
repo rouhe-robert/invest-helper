@@ -21,10 +21,11 @@ const Debt = ({
   debtPaymentYears,
   dwelling
 }) => {
-  const amountToPayToSeller = getAmountToPayToSeller(
-    dwelling,
-    bargainedAmount
-  );
+  const amountToPayToSeller = getAmountToPayToSeller({
+    bargainedAmount,
+    financingDebt: dwelling.financingDebt,
+    price: dwelling.price
+  });
 
   const bankLoan = getBankLoan(
     dwelling,
@@ -66,10 +67,10 @@ const Debt = ({
     debtIntrestRate
   );
 
-  const price = getPrice(
-    dwelling,
-    bargainedAmount
-  );
+  const price = getPrice({
+    bargainedAmount,
+    price: dwelling.price
+  });
 
   const priceWithAllDebts = getPriceWithAllDebts(
     dwelling,

@@ -70,10 +70,10 @@ const Analytics = ({
     debtEquityRatio
   );
 
-  const price = getPrice(
-    dwelling,
-    bargainedAmount
-  );
+  const price = getPrice({
+    bargainedAmount,
+    price: dwelling.price
+  });
 
   const priceWithAllDebts = getPriceWithAllDebts(
     dwelling,

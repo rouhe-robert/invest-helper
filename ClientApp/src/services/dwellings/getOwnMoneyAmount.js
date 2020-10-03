@@ -2,5 +2,13 @@ import getAmountToPayToSeller from './getAmountToPayToSeller';
 import getBankLoan from './getBankLoan';
 
 export default (dwelling, bargainedAmount, debtEquityRatio) => (
-  getAmountToPayToSeller(dwelling, bargainedAmount) - getBankLoan(dwelling, bargainedAmount, debtEquityRatio) + dwelling.dwellingRenovationDebt
+  getAmountToPayToSeller({
+    bargainedAmount,
+    financingDebt: dwelling.financingDebt,
+    price: dwelling.price
+  }) - getBankLoan(
+    dwelling,
+    bargainedAmount,
+    debtEquityRatio
+  ) + dwelling.dwellingRenovationDebt
 );

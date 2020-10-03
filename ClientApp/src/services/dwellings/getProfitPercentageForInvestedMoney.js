@@ -5,7 +5,7 @@ export default (dwelling, bargainedAmount, rentEuros, rentingRate, debtEquityRat
   (
     getMonthlyProfit(dwelling, rentEuros, rentingRate, bargainedAmount, debtEquityRatio, debtIntrestRate) * 12
   ) / (
-    (getPrice(dwelling, bargainedAmount) * (debtEquityRatio / 100))
+    (getPrice({bargainedAmount, price: dwelling.price}) * (debtEquityRatio / 100))
       + dwelling.dwellingRenovationDebt
   ) * 100
 );

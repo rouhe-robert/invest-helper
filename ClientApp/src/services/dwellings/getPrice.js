@@ -1,1 +1,3 @@
-export default (dwelling, bargainedAmount) => dwelling.price - bargainedAmount;
+export default (dwelling, bargainedAmount) => (
+  dwelling.price - bargainedAmount
+);

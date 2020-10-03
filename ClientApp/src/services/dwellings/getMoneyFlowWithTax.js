@@ -1,5 +1,6 @@
 import getTotalMonthlyPayment from './getTotalMonthlyPayment';
 import getCapitalIncomeMonthlyTax from './getCapitalIncomeMonthlyTax';
+import getMoneyFlowWithoutTax from './getMoneyFlowWithoutTax';
 
 export default (
   dwelling,
@@ -11,19 +12,22 @@ export default (
   debtPaymentYears,
   capitalIncomeTaxRate
 ) => (
-  rentEuros
-  - dwelling.maintenanceCharge
-  - getTotalMonthlyPayment(
-      dwelling,
-      bargainedAmount,
-      debtEquityRatio,
-      debtIntrestRate,
-      debtPaymentYears
-    )
-  - getCapitalIncomeMonthlyTax(
+  getMoneyFlowWithoutTax(
     dwelling,
     rentEuros,
     rentingRate,
-    capitalIncomeTaxRate
+    bargainedAmount,
+    debtEquityRatio,
+    debtIntrestRate,
+    debtPaymentYears
   )
+  - getCapitalIncomeMonthlyTax(
+      dwelling,
+      rentEuros,
+      rentingRate,
+      bargainedAmount,
+      debtEquityRatio,
+      debtIntrestRate,
+      capitalIncomeTaxRate
+    )
 );

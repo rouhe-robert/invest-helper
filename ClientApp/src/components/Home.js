@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Table, Button } from 'reactstrap';
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
 import apiDwellings from '../api/dwellings';
 
@@ -17,10 +17,6 @@ const Home = () => {
 
   const fetchDwellings = async () => {
     setDwellings(await apiDwellings.get());
-  }
-
-  const openDwelling = id => {
-    history.push("/dwellings/" + id);
   }
 
   useEffect(
@@ -41,8 +37,12 @@ const Home = () => {
         </thead>
         <tbody>
           {dwellings.map(dwelling => (
-            <tr key={'dwelling-' + dwelling.id} onClick={() => openDwelling(dwelling.id)}>
-              <td>{dwelling.address}</td>
+            <tr key={'dwelling-' + dwelling.id}>
+              <td>
+                <Link to={"/dwellings/" + dwelling.id}>
+                  {dwelling.address}
+                </Link>
+              </td>
             </tr>
           ))}
         </tbody>

@@ -1,5 +1,5 @@
-import getPrice from "./getPrice";
+import getAmountToPayToSeller from "./getAmountToPayToSeller";
 
 export default (dwelling, bargainedAmount, debtEquityRatio) => (
-  getPrice(dwelling, bargainedAmount) * (1 - (debtEquityRatio / 100))
+  getAmountToPayToSeller(dwelling, bargainedAmount) * (1 - (debtEquityRatio / 100))
 );

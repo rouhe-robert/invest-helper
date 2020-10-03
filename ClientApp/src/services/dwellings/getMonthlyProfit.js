@@ -1,6 +1,7 @@
 import getTotalIntrestPayments from "./getTotalIntrestPayments";
 
 export default (dwelling, rentEuros, rentingRate, bargainedAmount, debtEquityRatio, debtIntrestRate) => (
-  ((rentEuros - dwelling.maintenanceCharge) * (rentingRate / 12))
+  (rentEuros * (rentingRate / 12))
+    - dwelling.maintenanceCharge
     - getTotalIntrestPayments(dwelling, bargainedAmount, debtEquityRatio, debtIntrestRate)
 );

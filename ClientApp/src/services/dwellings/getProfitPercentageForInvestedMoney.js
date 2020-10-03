@@ -7,6 +7,5 @@ export default (dwelling, bargainedAmount, rentEuros, rentingRate, debtEquityRat
   ) / (
     (getPrice(dwelling, bargainedAmount) * (debtEquityRatio / 100))
       + dwelling.dwellingRenovationDebt
-      + dwelling.housingCooperativeRenovationDebt
   ) * 100
 );

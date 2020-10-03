@@ -79,7 +79,7 @@ const Settings = ({
         <Col md="4">
           <FloatInput
             id={'capital-income-tax-rate'}
-            label={'Kiinteistövero, %'}
+            label={'Pääomatulovero, %'}
             setValue={setCapitalIncomeTaxRate}
             value={capitalIncomeTaxRate}
           />

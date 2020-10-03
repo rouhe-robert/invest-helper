@@ -1,8 +1,22 @@
-export default (dwelling, rentEuros, rentingRate, capitalIncomeTaxRate) => (
-  (
-    rentEuros
-    * (rentingRate / 12)
-    * (1 - (capitalIncomeTaxRate / 100))
+import getMonthlyProfit from "./getMonthlyProfit";
+
+export default (
+  dwelling,
+  rentEuros,
+  rentingRate,
+  bargainedAmount,
+  debtEquityRatio,
+  debtIntrestRate,
+  capitalIncomeTaxRate
+) => (
+  getMonthlyProfit(
+    dwelling,
+    rentEuros,
+    rentingRate,
+    bargainedAmount,
+    debtEquityRatio,
+    debtIntrestRate
+  ) * (
+    capitalIncomeTaxRate / 100
   )
-    - dwelling.maintenanceCharge
 );

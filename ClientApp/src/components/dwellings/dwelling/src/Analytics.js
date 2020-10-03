@@ -5,11 +5,13 @@ import getCapitalIncomeMonthlyTax from '../../../../services/dwellings/getCapita
 import getMoneyFlowWithoutTax from '../../../../services/dwellings/getMoneyFlowWithoutTax';
 import getMoneyFlowWithTax from '../../../../services/dwellings/getMoneyFlowWithTax';
 import getMonthlyProfit from '../../../../services/dwellings/getMonthlyProfit';
+import getOwnMoneyAmount from '../../../../services/dwellings/getOwnMoneyAmount';
 import getPriceWithAllDebts from '../../../../services/dwellings/getPriceWithAllDebts';
 import getProfitPercentageForInvestedMoney from '../../../../services/dwellings/getProfitPercentageForInvestedMoney';
 import getProfitPercentageForPrice from '../../../../services/dwellings/getProfitPercentageForPrice';
 import getTotalDebt from '../../../../services/dwellings/getTotalDebt';
 import getTotalMonthlyPayment from '../../../../services/dwellings/getTotalMonthlyPayment';
+import getPrice from '../../../../services/dwellings/getPrice';
 
 const Analytics = ({
   bargainedAmount,
@@ -26,6 +28,9 @@ const Analytics = ({
     dwelling,
     rentEuros,
     rentingRate,
+    bargainedAmount,
+    debtEquityRatio,
+    debtIntrestRate,
     capitalIncomeTaxRate
   );
 
@@ -57,6 +62,17 @@ const Analytics = ({
     bargainedAmount,
     debtEquityRatio,
     debtIntrestRate
+  );
+
+  const ownMoneyAmount = getOwnMoneyAmount(
+    dwelling,
+    bargainedAmount,
+    debtEquityRatio
+  );
+
+  const price = getPrice(
+    dwelling,
+    bargainedAmount
   );
 
   const priceWithAllDebts = getPriceWithAllDebts(
@@ -130,8 +146,9 @@ const Analytics = ({
       <Row>
         <Col md="6">
           <h5>Hinta</h5>
-          Velaton hinta: <strong>{dwelling.price}</strong>€<br />
+          Velaton hinta: <strong>{price.toFixed(2)}</strong>€<br />
           Korjausvelan kanssa: <strong>{priceWithAllDebts.toFixed(2)}€</strong><br />
+          Omaa rahaa käytettävä: {ownMoneyAmount.toFixed(2)}€<br />
           Velkaa yhteensä korjausvelan kanssa: {totalDebt.toFixed(2)}€
         </Col>
       </Row>

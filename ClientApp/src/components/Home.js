@@ -26,6 +26,14 @@ const Home = () => {
     []
   );
 
+  const sortedDwellings = [...dwellings].sort((a, b) => {
+    if (a.address === b.address) {
+      return 0;
+    }
+
+    return a.address.toLowerCase() < b.address.toLowerCase() ? -1 : 1;
+  });
+
   return (
     <div className="dwellings-list">
       <Button onClick={createNewDwelling}>Lisää uusi</Button>
@@ -36,7 +44,7 @@ const Home = () => {
           </tr>
         </thead>
         <tbody>
-          {dwellings.map(dwelling => (
+          {sortedDwellings.map(dwelling => (
             <tr key={'dwelling-' + dwelling.id}>
               <td>
                 <Link to={"/dwellings/" + dwelling.id}>

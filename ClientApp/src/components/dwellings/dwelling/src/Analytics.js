@@ -78,7 +78,7 @@ const Analytics = ({
   const priceWithAllDebts = getPriceWithAllDebts({
     bargainedAmount,
     dwellingRenovationDebt: dwelling.dwellingRenovationDebt,
-    housingRenovationDebt: dwelling.housingRenovationDebt,
+    housingCooperativeRenovationDebt: dwelling.housingCooperativeRenovationDebt,
     price: dwelling.price
   });
 

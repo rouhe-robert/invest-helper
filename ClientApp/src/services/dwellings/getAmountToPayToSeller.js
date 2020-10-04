@@ -1,18 +1,11 @@
 import getPrice from './getPrice'
 
 export default ({bargainedAmount, financingDebt, price}) => {
-  if (!validParameters({bargainedAmount, financingDebt, price})) {
-    throw new Error();
+  const paidPrice = getPrice({bargainedAmount, price});
+
+  if (typeof financingDebt === 'undefined') {
+    throw 'Undefined financing debt';
   }
 
-  return (
-    getPrice({bargainedAmount, price})
-      - financingDebt
-  );
-}
-
-const validParameters = ({bargainedAmount, financingDebt, price}) => (
-  typeof bargainedAmount !== 'undefined'
-  && typeof financingDebt !== 'undefined'
-  && typeof price !== 'undefined'
-);
+  return paidPrice - financingDebt;
+};

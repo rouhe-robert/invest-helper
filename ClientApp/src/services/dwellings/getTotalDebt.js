@@ -1,8 +1,11 @@
-import getBankLoan from "./getBankLoan";
+import getBankLoan from './getBankLoan';
+import getTotalRenovationDebt from './getTotalRenovationDebt';
 
 export default (dwelling, bargainedAmount, debtEquityRatio) => (
   getBankLoan(dwelling, bargainedAmount, debtEquityRatio)
     + dwelling.financingDebt
-    + dwelling.dwellingRenovationDebt
-    + dwelling.housingCooperativeRenovationDebt
+    + getTotalRenovationDebt({
+      dwellingRenovationDebt: dwelling.dwellingRenovationDebt,
+      housingCooperativeRenovationDebt: dwelling.housingCooperativeRenovationDebt
+    })
 );

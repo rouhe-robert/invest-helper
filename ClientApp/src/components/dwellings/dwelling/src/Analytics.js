@@ -75,10 +75,12 @@ const Analytics = ({
     price: dwelling.price
   });
 
-  const priceWithAllDebts = getPriceWithAllDebts(
-    dwelling,
-    bargainedAmount
-  );
+  const priceWithAllDebts = getPriceWithAllDebts({
+    bargainedAmount,
+    dwellingRenovationDebt: dwelling.dwellingRenovationDebt,
+    housingRenovationDebt: dwelling.housingRenovationDebt,
+    price: dwelling.price
+  });
 
   const profitPercentageForInvestedMoney = getProfitPercentageForInvestedMoney(
     dwelling,

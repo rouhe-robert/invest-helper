@@ -1,6 +1,21 @@
-export default (dwelling, bargainedAmount) => (
-  dwelling.price
-    + dwelling.dwellingRenovationDebt
-    + dwelling.housingCooperativeRenovationDebt
-    - bargainedAmount
-);
+import getPrice from "./getPrice";
+import getTotalRenovationDebt from "./getTotalRenovationDebt";
+
+export default ({
+  bargainedAmount,
+  dwellingRenovationDebt,
+  housingCooperativeRenovationDebt,
+  price
+}) => {
+  const paidPrice = getPrice({
+    bargainedAmount,
+    price
+  });
+
+  const totalRenovationDebt = getTotalRenovationDebt({
+    dwellingRenovationDebt,
+    housingCooperativeRenovationDebt
+  });
+
+  return paidPrice + totalRenovationDebt;
+};
